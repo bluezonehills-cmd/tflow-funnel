@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tunnel TFLOW - Identité Digitale Premium</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #131a2c;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.5);
+            --gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #ffffff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .hero {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 80px auto;
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #ffffff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 35px;
+        }
+
+        /* Formulaire de Capture */
+        .optin-form {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(0, 0, 0, 0.2);
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            background: var(--gradient);
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px var(--accent-glow);
+        }
+
+        /* Section 4 Étapes */
+        .steps-section {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .steps-grid {
+            display: block;
+        }
+
+        .step-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent);
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            border-right: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .step-num {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .step-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .step-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        /* Avantages */
+        .benefits {
+            background-color: rgba(59, 130, 246, 0.03);
+            border: 1px dashed rgba(59, 130, 246, 0.2);
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 80px;
+        }
+
+        .benefits h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .benefits-list {
+            list-style: none;
+        }
+
+        .benefits-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+            font-size: 15px;
+            color: var(--text-muted);
+        }
+
+        .benefits-list li strong {
+            color: var(--text-main);
+        }
+
+        .benefits-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Footer / CTA Final */
+        .cta-final {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, var(--card-bg) 0%, rgba(19, 26, 44, 0.5) 100%);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .cta-final h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .cta-final p {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+        }
+
+        .limited {
+            display: inline-block;
+            background-color: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header>
+            <div class="logo">TFLOW ECOSYSTEM</div>
+        </header>
+
+        <!-- SECTION HERO -->
+        <section class="hero">
+            <h1>Ne soyez plus invisible.<br>Prenez le contrôle de votre scène numérique.</h1>
+            <p class="subtitle">Découvrez l’écosystème TFLOW et déployez votre Identité Digitale Premium grâce à un arsenal d'outils puissants conçus pour vous propulser au rang d'acteur majeur.</p>
+            
+            <div class="optin-form">
+                <form onsubmit="event.preventDefault(); alert('Tunnel configuré avec succès ! Prochaine étape : redirection.');">
+                    <div class="form-group">
+                        <input type="text" placeholder="Votre Prénom" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Votre Adresse Email" required>
+                    </div>
+                    <button type="submit" class="btn">🚀 Découvrir le concept en 4 étapes (Gratuit)</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- SECTION 4 ETAPES -->
+        <section class="steps-section">
+            <h2 class="section-title">Comment l'Écosystème TFLOW transforme votre présence en ligne</h2>
+            
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">Étape 01</div>
+                    <h3>Le Diagnostic Stratégique</h3>
+                    <p>Nous analysons minutieusement votre empreinte numérique actuelle. L'objectif est d'identifer les angles morts, les incohérences graphiques et les opportunités manquées qui freinent votre visibilité.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">Étape 02</div>
+                    <h3>La Conception de la Vitrine Premium</h3>
+                    <p>Nos équipes conçoivent une identité visuelle et textuelle haut de gamme. Nous créons une charte moderne, épurée et professionnelle qui impose le respect et inspire immédiatement confiance.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">Étape 03</div>
+                    <h3>Le Déploiement de l'Arsenal d'Outils</h3>
+                    <p>Nous intégrons les outils natifs de l'écosystème TFLOW. Plus besoin de jongler entre dix abonnements : vous disposez d'une plateforme centralisée pour piloter et diffuser votre communication.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">Étape 04</div>
+                    <h3>Le Positionnement de Référence</h3>
+                    <p>Votre arsenal est en place et tourne en continu. Vous quittez définitivement l'anonymat pour vous positionner comme un acteur majeur et une référence absolue sur votre marché.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION AVANTAGES -->
+        <section class="benefits">
+            <h2>Pourquoi choisir l'écosystème TFLOW ?</h2>
+            <ul class="benefits-list">
+                <li><strong>Accessibilité totale :</strong> Aucune compétence technique requise. Nous installons l'arsenal pour vous, et sa gestion est pensée pour être d'une simplicité enfantine.</li>
+                <li><strong>Rentabilité maximale :</strong> En centralisant vos besoins (identité, outils, visibilité), TFLOW remplace de multiples abonnements et services coûteux.</li>
+                <li><strong>Crédibilité immédiate :</strong> Vos prospects ne se poseront plus la question de votre légitimité. Votre présence en ligne premium parlera d'elle-même.</li>
+            </ul>
+        </section>
+
+        <!-- CTA FINAL -->
+        <section class="cta-final">
+            <div class="limited">🔥 Offre de lancement limitée</div>
+            <h2>Prêt à passer au niveau Premium ?</h2>
+            <p>Ne laissez pas vos concurrents occuper l'espace numérique qui vous revient. Pour célébrer le lancement de notre écosystème, nous offrons une session de diagnostic de 15 minutes aux 50 premiers inscrits.</p>
+            <a href="#" class="btn" onclick="event.preventDefault(); alert('Lien vers votre Calendly ou WhatsApp Business à insérer ici !');">📅 Réserver mon Diagnostic Offert (15 min)</a>
+        </section>
+
+        <footer>
+            &copy; 2026 Tflow Ecosystem. Tous droits réservés.
+        </footer>
+
+    </div>
+
+</body>
+</html>
