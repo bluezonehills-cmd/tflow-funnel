@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tunnel TFLOW - Identité Digitale Premium</title>
+    
+    <!-- Brevo required fonts (minimal) -->
+    <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+    
     <style>
         :root {
             --bg-color: #0b0f19;
@@ -73,155 +77,106 @@
             margin-bottom: 35px;
         }
 
-        /* Formulaire de Capture */
-        .optin-form {
-            background-color: var(--card-bg);
-            padding: 30px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            max-width: 550px;
-            margin: 0 auto;
+        /* ============ BREVO FORM OVERRIDES ============ */
+        /* Make Brevo form inherit dark theme */
+        .sib-form {
+            background-color: transparent !important;
+            text-align: center !important;
         }
 
-        .form-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            text-align: center;
+        #sib-container {
+            background-color: var(--card-bg) !important;
+            border: 1px solid rgba(255, 255, 255, 0.05) !important;
+            border-radius: 16px !important;
+            max-width: 550px !important;
+            margin: 0 auto !important;
+            padding: 30px !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3) !important;
         }
 
-        .form-subtitle {
-            font-size: 14px;
-            color: var(--text-muted);
-            text-align: center;
-            margin-bottom: 25px;
+        /* Override text colors */
+        #sib-container .sib-form-block,
+        #sib-container .entry__label,
+        #sib-container .sib-text-form-block p {
+            color: var(--text-main) !important;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
         }
 
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
+        #sib-container .entry__specification {
+            color: var(--text-muted) !important;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
         }
 
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 6px;
+        /* Override input fields */
+        #sib-container input[type="text"],
+        #sib-container input[type="email"] {
+            width: 100% !important;
+            padding: 14px 18px !important;
+            border-radius: 8px !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            background-color: rgba(0, 0, 0, 0.2) !important;
+            color: white !important;
+            font-size: 16px !important;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+            transition: all 0.3s ease !important;
         }
 
-        .form-group .hint {
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-top: 4px;
+        #sib-container input:focus {
+            outline: none !important;
+            border-color: var(--accent) !important;
+            box-shadow: 0 0 10px var(--accent-glow) !important;
         }
 
-        input[type="text"], input[type="email"] {
-            width: 100%;
-            padding: 14px 18px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background-color: rgba(0, 0, 0, 0.2);
-            color: white;
-            font-size: 16px;
-            transition: all 0.3s ease;
+        #sib-container input::placeholder {
+            color: #64748b !important;
         }
 
-        input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 10px var(--accent-glow);
+        /* Override submit button */
+        #sib-container .sib-form-block__button {
+            display: block !important;
+            width: 100% !important;
+            padding: 16px !important;
+            border: none !important;
+            border-radius: 8px !important;
+            background: var(--gradient) !important;
+            color: white !important;
+            font-size: 16px !important;
+            font-weight: 700 !important;
+            cursor: pointer !important;
+            text-align: center !important;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
+            transition: transform 0.2s ease, box-shadow 0.2s ease !important;
         }
 
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 16px;
-            border: none;
-            border-radius: 8px;
-            background: var(--gradient);
-            color: white;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-            text-align: center;
-            text-decoration: none;
-            margin-top: 10px;
+        #sib-container .sib-form-block__button:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 10px 20px var(--accent-glow) !important;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px var(--accent-glow);
+        /* Override success/error messages */
+        #success-message {
+            background-color: rgba(16, 185, 129, 0.15) !important;
+            border-color: rgba(16, 185, 129, 0.3) !important;
+            color: #6ee7b7 !important;
+            border-radius: 8px !important;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
         }
 
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
+        #error-message {
+            background-color: rgba(239, 68, 68, 0.15) !important;
+            border-color: rgba(239, 68, 68, 0.3) !important;
+            color: #fca5a5 !important;
+            border-radius: 8px !important;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
         }
 
-        /* Loading spinner */
-        .btn-loading {
-            position: relative;
-            pointer-events: none;
+        /* Hide the progress indicator SVG */
+        .progress-indicator__icon {
+            display: none !important;
         }
 
-        .btn-loading::after {
-            content: "";
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            top: 50%;
-            left: 50%;
-            margin-left: -10px;
-            margin-top: -10px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        .btn-loading span {
-            visibility: hidden;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Messages */
-        .form-message {
-            padding: 12px 16px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            display: none;
-        }
-
-        .form-message.success {
-            display: block;
-            background-color: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: #6ee7b7;
-        }
-
-        .form-message.error {
-            display: block;
-            background-color: rgba(239, 68, 68, 0.15);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #fca5a5;
-        }
-
-        .field-error {
-            font-size: 12px;
-            color: #f87171;
-            margin-top: 4px;
-            display: none;
-        }
+        /* ============ END BREVO OVERRIDES ============ */
 
         /* Section 4 Étapes */
         .steps-section {
@@ -346,16 +301,6 @@
             font-size: 12px;
             color: rgba(255,255,255,0.2);
         }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 32px;
-            }
-            .optin-form {
-                padding: 20px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -371,50 +316,130 @@
             <h1>Ne soyez plus invisible.<br>Prenez le contrôle de votre scène numérique.</h1>
             <p class="subtitle">Découvrez l'écosystème TFLOW et déployez votre Identité Digitale Premium grâce à un arsenal d'outils puissants conçus pour vous propulser au rang d'acteur majeur.</p>
             
-            <!-- FORMULAIRE BREVO INTÉGRÉ -->
-            <div class="optin-form">
-                <div class="form-title">Rejoignez la Newsletter</div>
-                <div class="form-subtitle">Abonnez-vous pour rester informé et recevoir nos actualités exclusives.</div>
-
-                <!-- Message de succès -->
-                <div class="form-message success" id="successMessage">
-                    ✅ Votre inscription a bien été enregistrée ! Vérifiez votre boîte mail pour confirmer.
+            <!-- BREVO FORM - KEEPING ORIGINAL STRUCTURE -->
+            <!-- START Brevo Form -->
+            <div class="sib-form" style="text-align: center; background-color: transparent;">
+              <div id="sib-form-container" class="sib-form-container">
+                
+                <!-- Error Message -->
+                <div id="error-message" class="sib-form-message-panel" style="font-size:16px; text-align:left; border-radius:3px; max-width:540px;">
+                  <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+                    <svg viewBox="0 0 512 512" class="sib-icon sib-notification__icon">
+                      <path d="M256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm-11.49 120h22.979c6.823 0 12.274 5.682 11.99 12.5l-7 168c-.268 6.428-5.556 11.5-11.99 11.5h-8.979c-6.433 0-11.722-5.073-11.99-11.5l-7-168c-.283-6.818 5.167-12.5 11.99-12.5zM256 340c-15.464 0-28 12.536-28 28s12.536 28 28 28 28-12.536 28-28-12.536-28-28-28z" />
+                    </svg>
+                    <span class="sib-form-message-panel__inner-text">Your subscription could not be saved. Please try again.</span>
+                  </div>
                 </div>
-
-                <!-- Message d'erreur -->
-                <div class="form-message error" id="errorMessage">
-                    ❌ Une erreur est survenue. Veuillez réessayer.
+                
+                <!-- Success Message -->
+                <div id="success-message" class="sib-form-message-panel" style="font-size:16px; text-align:left; border-radius:3px; max-width:540px;">
+                  <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+                    <svg viewBox="0 0 512 512" class="sib-icon sib-notification__icon">
+                      <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 464c-118.664 0-216-96.055-216-216 0-118.663 96.055-216 216-216 118.664 0 216 96.055 216 216 0 118.663-96.055 216-216 216zm141.63-274.961L217.15 376.071c-4.705 4.667-12.303 4.637-16.97-.068l-85.878-86.572c-4.667-4.705-4.637-12.303.068-16.97l8.52-8.451c4.705-4.667 12.303-4.637 16.97.068l68.976 69.533 163.441-162.13c4.705-4.667 12.303-4.637 16.97.068l8.451 8.52c4.668 4.705 4.637 12.303-.068 16.97z" />
+                    </svg>
+                    <span class="sib-form-message-panel__inner-text">Your subscription has been successful.</span>
+                  </div>
                 </div>
+                
+                <div id="sib-container" class="sib-container--large sib-container--vertical" style="max-width:540px; text-align:center; direction:ltr">
+                  <form id="sib-form" method="POST" action="https://1266b1f6.sibforms.com/serve/MUIFAB8-PLBw085Wyal83nlvhllLOxUTJ6G2rrhquR61GBEAQn7EHCobnkzvRF13l1Mp4UKqxq9TI6gMt0e6FrAaPooYWl23MIBUwdEdpttd7rUzU6u8eDUaJMSNQ0nlCZmiOZtgG4oMiswM_TFhuDyiepr8ke-PW18LvoMy3mxtAWnTl2TZir_eg8y9MGAr64YIvoJZXadizgIDtw==" data-type="subscription">
 
-                <form id="sib-form" method="POST" action="https://1266b1f6.sibforms.com/serve/MUIFAB8-PLBw085Wyal83nlvhllLOxUTJ6G2rrhquR61GBEAQn7EHCobnkzvRF13l1Mp4UKqxq9TI6gMt0e6FrAaPooYWl23MIBUwdEdpttd7rUzU6u8eDUaJMSNQ0nlCZmiOZtgG4oMiswM_TFhuDyiepr8ke-PW18LvoMy3mxtAWnTl2TZir_eg8y9MGAr64YIvoJZXadizgIDtw==" data-type="subscription">
-                    
+                    <div style="padding: 8px 0;">
+                      <div class="sib-form-block" style="font-size:32px; font-weight:700; text-align:left; background-color:transparent; text-align:left">
+                        <p>Newsletter</p>
+                      </div>
+                    </div>
+
+                    <div style="padding: 8px 0;">
+                      <div class="sib-form-block" style="font-size:16px; text-align:left; background-color:transparent; text-align:left">
+                        <div class="sib-text-form-block">
+                          <p>Subscribe to our newsletter and stay updated.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div style="padding: 8px 0;">
+                      <div class="sib-input sib-form-block">
+                        <div class="form__entry entry_block">
+                          <div class="form__label-row">
+                            <label class="entry__label" style="font-weight: 700; text-align: left; font-size:16px; text-align:left;" for="EMAIL" data-required="*">Enter your email address to subscribe</label>
+                            <div class="entry__field">
+                              <input class="input" type="email" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="EMAIL" data-required="true" required />
+                            </div>
+                          </div>
+                          <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left;">
+                          </label>
+                          <label class="entry__specification" style="font-size:12px; text-align:left; text-align:left">
+                            Provide your email address to subscribe. For e.g abc@xyz.com
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div style="padding: 8px 0;">
+                      <div class="sib-input sib-form-block">
+                        <div class="form__entry entry_block">
+                          <div class="form__label-row">
+                            <label class="entry__label" style="font-weight: 700; text-align: left; font-size:16px; text-align:left;" for="FIRSTNAME" data-required="*">Enter your FIRSTNAME</label>
+                            <div class="entry__field">
+                              <input class="input" maxlength="200" type="text" id="FIRSTNAME" name="FIRSTNAME" autocomplete="off" placeholder="FIRSTNAME" data-required="true" required />
+                            </div>
+                          </div>
+                          <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left;">
+                          </label>
+                          <label class="entry__specification" style="font-size:12px; text-align:left; text-align:left">
+                            Customize this optional help text before publishing your form.
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div style="padding: 8px 0;">
+                      <div class="sib-input sib-form-block">
+                        <div class="form__entry entry_block">
+                          <div class="form__label-row">
+                            <label class="entry__label" style="font-weight: 700; text-align: left; font-size:16px; text-align:left;" for="LASTNAME" data-required="*">Enter your LASTNAME</label>
+                            <div class="entry__field">
+                              <input class="input" maxlength="200" type="text" id="LASTNAME" name="LASTNAME" autocomplete="off" placeholder="LASTNAME" data-required="true" required />
+                            </div>
+                          </div>
+                          <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left;">
+                          </label>
+                          <label class="entry__specification" style="font-size:12px; text-align:left; text-align:left">
+                            Customize this optional help text before publishing your form.
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div style="padding: 8px 0;">
+                      <div class="sib-form-block" style="text-align: left">
+                        <button class="sib-form-block__button sib-form-block__button-with-loader" style="font-size:16px; font-weight:700; text-align:left; border-width:0px; border-radius:3px;" form="sib-form" type="submit">
+                          <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512">
+                            <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
+                          </svg>
+                          SUBSCRIBE
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- IMPORTANT: Hidden fields for Brevo automation -->
+                    <input type="text" name="email_address_check" value="" class="input--hidden">
                     <input type="hidden" name="locale" value="fr">
-                    <input type="text" name="email_address_check" value="" style="display:none !important" tabindex="-1" autocomplete="off">
-
-                    <div class="form-group">
-                        <label for="EMAIL">Email *</label>
-                        <input type="email" id="EMAIL" name="EMAIL" placeholder="votre@email.com" required autocomplete="email">
-                        <div class="hint">Ex: abc@xyz.com</div>
-                        <div class="field-error" id="emailError">Veuillez entrer une adresse email valide.</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="FIRSTNAME">Prénom *</label>
-                        <input type="text" id="FIRSTNAME" name="FIRSTNAME" placeholder="Votre prénom" required autocomplete="given-name">
-                        <div class="field-error" id="firstnameError">Ce champ est obligatoire.</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="LASTNAME">Nom *</label>
-                        <input type="text" id="LASTNAME" name="LASTNAME" placeholder="Votre nom" required autocomplete="family-name">
-                        <div class="field-error" id="lastnameError">Ce champ est obligatoire.</div>
-                    </div>
-
-                    <button type="submit" class="btn" id="submitBtn">
-                        <span>S'INSCRIRE</span>
-                    </button>
-                </form>
+                    
+                    <!-- ADD THIS: List ID(s) - replace with your actual Brevo list ID(s) -->
+                    <!-- Check your Brevo form settings to find the correct list IDs -->
+                    <input type="hidden" name="list_ids" value="3">
+                    
+                    <!-- If you have a specific template/automation ID -->
+                    <input type="hidden" name="template_id" value="">
+                    
+                  </form>
+                </div>
+              </div>
             </div>
+            <!-- END Brevo Form -->
+            
         </section>
 
         <!-- SECTION 4 ÉTAPES (MÉTHODOLOGIE) -->
@@ -460,7 +485,7 @@
             <span class="limited">🎯 PLACES LIMITÉES</span>
             <h2>Prêt à construire votre empire digital ?</h2>
             <p>Inscrivez-vous maintenant pour recevoir en exclusivité les stratégies, outils et opportunités TFLOW avant tout le monde.</p>
-            <a href="#" class="btn" onclick="document.querySelector('.optin-form').scrollIntoView({behavior: 'smooth'}); return false;">
+            <a href="#" class="btn" style="display:inline-block; background:var(--gradient); padding:16px 40px; border-radius:8px; text-decoration:none; font-weight:700;" onclick="document.getElementById('sib-container').scrollIntoView({behavior:'smooth'}); return false;">
                 JE VEUX MA PLACE
             </a>
         </section>
@@ -470,135 +495,27 @@
         </footer>
     </div>
 
-    <!-- Script de gestion du formulaire Brevo -->
+    <!-- Brevo Scripts -->
     <script>
-        (function() {
-            const form = document.getElementById('sib-form');
-            const submitBtn = document.getElementById('submitBtn');
-            const successMessage = document.getElementById('successMessage');
-            const errorMessage = document.getElementById('errorMessage');
-            
-            // Field error elements
-            const emailError = document.getElementById('emailError');
-            const firstnameError = document.getElementById('firstnameError');
-            const lastnameError = document.getElementById('lastnameError');
-            
-            const emailInput = document.getElementById('EMAIL');
-            const firstnameInput = document.getElementById('FIRSTNAME');
-            const lastnameInput = document.getElementById('LASTNAME');
-
-            // Hide all field errors on input
-            [emailInput, firstnameInput, lastnameInput].forEach(input => {
-                input.addEventListener('input', function() {
-                    const errorEl = document.getElementById(this.id.toLowerCase() + 'Error');
-                    if (errorEl) errorEl.style.display = 'none';
-                });
-            });
-
-            // Email validation helper
-            function isValidEmail(email) {
-                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-            }
-
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Hide global messages
-                successMessage.style.display = 'none';
-                errorMessage.style.display = 'none';
-                
-                // Reset field errors
-                [emailError, firstnameError, lastnameError].forEach(el => {
-                    if (el) el.style.display = 'none';
-                });
-
-                // Validate fields
-                let hasError = false;
-
-                if (!emailInput.value.trim()) {
-                    emailError.style.display = 'block';
-                    emailError.textContent = 'Ce champ est obligatoire.';
-                    hasError = true;
-                } else if (!isValidEmail(emailInput.value.trim())) {
-                    emailError.style.display = 'block';
-                    emailError.textContent = 'Veuillez entrer une adresse email valide.';
-                    hasError = true;
-                }
-
-                if (!firstnameInput.value.trim()) {
-                    firstnameError.style.display = 'block';
-                    hasError = true;
-                }
-
-                if (!lastnameInput.value.trim()) {
-                    lastnameError.style.display = 'block';
-                    hasError = true;
-                }
-
-                if (hasError) {
-                    // Scroll to first error
-                    const firstError = form.querySelector('.field-error[style*="block"]');
-                    if (firstError) {
-                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
-                    return;
-                }
-
-                // Show loading state
-                submitBtn.classList.add('btn-loading');
-                submitBtn.disabled = true;
-
-                // Submit to Brevo via fetch (AJAX)
-                const formData = new FormData(form);
-                
-                fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    mode: 'no-cors' // Brevo handles CORS this way
-                })
-                .then(() => {
-                    // Since no-cors doesn't give us response details, 
-                    // we assume success for the UX flow
-                    successMessage.style.display = 'block';
-                    form.reset();
-                    
-                    // Scroll to success message
-                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    
-                    // Also submit the form traditionally to ensure Brevo receives it
-                    // (as a fallback, hidden iframe technique)
-                    const iframe = document.createElement('iframe');
-                    iframe.name = 'brevo_hidden_frame';
-                    iframe.style.display = 'none';
-                    document.body.appendChild(iframe);
-                    
-                    const fallbackForm = form.cloneNode(true);
-                    fallbackForm.target = 'brevo_hidden_frame';
-                    fallbackForm.style.display = 'none';
-                    document.body.appendChild(fallbackForm);
-                    fallbackForm.submit();
-                    
-                    // Clean up
-                    setTimeout(() => {
-                        document.body.removeChild(fallbackForm);
-                        setTimeout(() => {
-                            document.body.removeChild(iframe);
-                        }, 5000);
-                    }, 1000);
-                })
-                .catch((error) => {
-                    console.error('Form submission error:', error);
-                    errorMessage.style.display = 'block';
-                    errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                })
-                .finally(() => {
-                    // Remove loading state
-                    submitBtn.classList.remove('btn-loading');
-                    submitBtn.disabled = false;
-                });
-            });
-        })();
+      window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code';
+      window.LOCALE = 'fr';
+      window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "The information provided is invalid. Please review the field format and try again.";
+      window.REQUIRED_ERROR_MESSAGE = "This field cannot be left blank. ";
+      window.GENERIC_INVALID_MESSAGE = "The information provided is invalid. Please review the field format and try again.";
+      window.INVALID_NUMBER = "The information provided is invalid. Please review the field format and try again.";
+      window.INVALID_DATE = "Please enter a valid date";
+      window.REQUIRED_MULTISELECT_MESSAGE = 'Please select at least 1 option';
+      window.translation = {
+        common: {
+          selectedList: '{quantity} list selected',
+          selectedLists: '{quantity} lists selected',
+          selectedOption: '{quantity} selected',
+          selectedOptions: '{quantity} selected',
+        }
+      };
+      var AUTOHIDE = Boolean(0);
     </script>
+    <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
 
 </body>
 </html>
