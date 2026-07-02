@@ -424,7 +424,7 @@
         </footer>
     </div>
 
-    <script>
+        <script>
         (function() {
             var form = document.getElementById('tflowForm');
             var btn = document.getElementById('submitBtn');
@@ -460,58 +460,37 @@
                 btn.disabled = true;
                 btn.textContent = 'INSCRIPTION EN COURS...';
 
-                // Create hidden iframe
-                var iframe = document.createElement('iframe');
-                iframe.name = 'brevo_frame';
-                iframe.style.display = 'none';
-                document.body.appendChild(iframe);
+                // Use fetch to submit directly
+                var formData = new URLSearchParams();
+                formData.append('EMAIL', email);
+                formData.append('FIRSTNAME', firstname);
+                formData.append('LASTNAME', lastname);
+                formData.append('locale', 'fr');
+                formData.append('email_address_check', '');
 
-                // Create form to submit
-                var hiddenForm = document.createElement('form');
-                hiddenForm.method = 'POST';
-                hiddenForm.action = 'https://1266b1f6.sibforms.com/serve/MUIFAB8-PLBw085Wyal83nlvhllLOxUTJ6G2rrhquR61GBEAQn7EHCobnkzvRF13l1Mp4UKqxq9TI6gMt0e6FrAaPooYWl23MIBUwdEdpttd7rUzU6u8eDUaJMSNQ0nlCZmiOZtgG4oMiswM_TFhuDyiepr8ke-PW18LvoMy3mxtAWnTl2TZir_eg8y9MGAr64YIvoJZXadizgIDtw==';
-                hiddenForm.target = 'brevo_frame';
-                hiddenForm.style.display = 'none';
-
-                // Add fields
-                var fields = [
-                    { name: 'EMAIL', value: email },
-                    { name: 'FIRSTNAME', value: firstname },
-                    { name: 'LASTNAME', value: lastname },
-                    { name: 'locale', value: 'fr' },
-                    { name: 'email_address_check', value: '' }
-                ];
-
-                for (var i = 0; i < fields.length; i++) {
-                    var input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = fields[i].name;
-                    input.value = fields[i].value;
-                    hiddenForm.appendChild(input);
-                }
-
-                document.body.appendChild(hiddenForm);
-
-                // Submit
-                hiddenForm.submit();
-
-                // Show success
-                setTimeout(function() {
+                fetch('https://1266b1f6.sibforms.com/serve/MUIFAB8-PLBw085Wyal83nlvhllLOxUTJ6G2rrhquR61GBEAQn7EHCobnkzvRF13l1Mp4UKqxq9TI6gMt0e6FrAaPooYWl23MIBUwdEdpttd7rUzU6u8eDUaJMSNQ0nlCZmiOZtgG4oMiswM_TFhuDyiepr8ke-PW18LvoMy3mxtAWnTl2TZir_eg8y9MGAr64YIvoJZXadizgIDtw==', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: formData.toString()
+                })
+                .then(function() {
                     successMsg.style.display = 'block';
                     btn.disabled = false;
                     btn.textContent = "S'INSCRIRE MAINTENANT";
                     form.reset();
                     successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-                    // Clean up
-                    setTimeout(function() {
-                        document.body.removeChild(hiddenForm);
-                        document.body.removeChild(iframe);
-                    }, 5000);
-                }, 1500);
+                })
+                .catch(function() {
+                    errorMsg.textContent = '❌ Une erreur est survenue. Veuillez réessayer.';
+                    errorMsg.style.display = 'block';
+                    btn.disabled = false;
+                    btn.textContent = "S'INSCRIRE MAINTENANT";
+                });
             });
         })();
     </script>
-
 </body>
 </html>
