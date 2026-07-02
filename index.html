@@ -424,7 +424,7 @@
         </footer>
     </div>
 
-        <script>
+           <script>
         (function() {
             var form = document.getElementById('tflowForm');
             var btn = document.getElementById('submitBtn');
@@ -434,16 +434,13 @@
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
 
-                // Hide old messages
                 successMsg.style.display = 'none';
                 errorMsg.style.display = 'none';
 
-                // Get values
                 var email = document.getElementById('EMAIL').value.trim();
                 var firstname = document.getElementById('FIRSTNAME').value.trim();
                 var lastname = document.getElementById('LASTNAME').value.trim();
 
-                // Validate
                 if (!email || !firstname || !lastname) {
                     errorMsg.textContent = '❌ Tous les champs sont obligatoires.';
                     errorMsg.style.display = 'block';
@@ -456,40 +453,46 @@
                     return;
                 }
 
-                // Show loading
                 btn.disabled = true;
                 btn.textContent = 'INSCRIPTION EN COURS...';
 
-                // Use fetch to submit directly
-                var formData = new URLSearchParams();
-                formData.append('EMAIL', email);
-                formData.append('FIRSTNAME', firstname);
-                formData.append('LASTNAME', lastname);
-                formData.append('locale', 'fr');
-                formData.append('email_address_check', '');
+                // Create a REAL form element and submit it (most reliable method)
+                var realForm = document.createElement('form');
+                realForm.method = 'POST';
+                realForm.action = 'https://1266b1f6.sibforms.com/serve/MUIFAB8-PLBw085Wyal83nlvhllLOxUTJ6G2rrhquR61GBEAQn7EHCobnkzvRF13l1Mp4UKqxq9TI6gMt0e6FrAaPooYWl23MIBUwdEdpttd7rUzU6u8eDUaJMSNQ0nlCZmiOZtgG4oMiswM_TFhuDyiepr8ke-PW18LvoMy3mxtAWnTl2TZir_eg8y9MGAr64YIvoJZXadizgIDtw==';
+                realForm.target = '_self';
+                realForm.style.display = 'none';
 
-                fetch('https://1266b1f6.sibforms.com/serve/MUIFAB8-PLBw085Wyal83nlvhllLOxUTJ6G2rrhquR61GBEAQn7EHCobnkzvRF13l1Mp4UKqxq9TI6gMt0e6FrAaPooYWl23MIBUwdEdpttd7rUzU6u8eDUaJMSNQ0nlCZmiOZtgG4oMiswM_TFhuDyiepr8ke-PW18LvoMy3mxtAWnTl2TZir_eg8y9MGAr64YIvoJZXadizgIDtw==', {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: formData.toString()
-                })
-                .then(function() {
-                    successMsg.style.display = 'block';
-                    btn.disabled = false;
-                    btn.textContent = "S'INSCRIRE MAINTENANT";
-                    form.reset();
-                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                })
-                .catch(function() {
-                    errorMsg.textContent = '❌ Une erreur est survenue. Veuillez réessayer.';
-                    errorMsg.style.display = 'block';
-                    btn.disabled = false;
-                    btn.textContent = "S'INSCRIRE MAINTENANT";
-                });
+                function addField(name, value) {
+                    var input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = name;
+                    input.value = value;
+                    realForm.appendChild(input);
+                }
+
+                addField('EMAIL', email);
+                addField('FIRSTNAME', firstname);
+                addField('LASTNAME', lastname);
+                addField('locale', 'fr');
+                addField('email_address_check', '');
+                addField('data-type', 'subscription');
+
+                document.body.appendChild(realForm);
+                
+                // Store success state before submitting
+                sessionStorage.setItem('tflow_submitted', 'true');
+                
+                realForm.submit();
             });
+
+            // Check if we just came back from a successful submission
+            if (sessionStorage.getItem('tflow_submitted') === 'true') {
+                sessionStorage.removeItem('tflow_submitted');
+                var successMsg = document.getElementById('successMsg');
+                successMsg.style.display = 'block';
+                successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         })();
     </script>
 </body>
