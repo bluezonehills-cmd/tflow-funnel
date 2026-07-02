@@ -84,9 +84,37 @@
             margin: 0 auto;
         }
 
+        .form-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .form-subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
         .form-group {
             margin-bottom: 15px;
             text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .form-group .hint {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
         }
 
         input[type="text"], input[type="email"] {
@@ -121,11 +149,78 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.2);
             text-align: center;
             text-decoration: none;
+            margin-top: 10px;
         }
 
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 20px var(--accent-glow);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Loading spinner */
+        .btn-loading {
+            position: relative;
+            pointer-events: none;
+        }
+
+        .btn-loading::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .btn-loading span {
+            visibility: hidden;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Messages */
+        .form-message {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .form-message.success {
+            display: block;
+            background-color: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #6ee7b7;
+        }
+
+        .form-message.error {
+            display: block;
+            background-color: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+        }
+
+        .field-error {
+            font-size: 12px;
+            color: #f87171;
+            margin-top: 4px;
+            display: none;
         }
 
         /* Section 4 Étapes */
@@ -251,6 +346,16 @@
             font-size: 12px;
             color: rgba(255,255,255,0.2);
         }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+            .optin-form {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -264,357 +369,236 @@
         <!-- SECTION HERO -->
         <section class="hero">
             <h1>Ne soyez plus invisible.<br>Prenez le contrôle de votre scène numérique.</h1>
-            <p class="subtitle">Découvrez l’écosystème TFLOW et déployez votre Identité Digitale Premium grâce à un arsenal d'outils puissants conçus pour vous propulser au rang d'acteur majeur.</p>
+            <p class="subtitle">Découvrez l'écosystème TFLOW et déployez votre Identité Digitale Premium grâce à un arsenal d'outils puissants conçus pour vous propulser au rang d'acteur majeur.</p>
             
-           <!-- Begin Brevo Form -->
+            <!-- FORMULAIRE BREVO INTÉGRÉ -->
+            <div class="optin-form">
+                <div class="form-title">Rejoignez la Newsletter</div>
+                <div class="form-subtitle">Abonnez-vous pour rester informé et recevoir nos actualités exclusives.</div>
 
-
-<!-- START - We recommend to place the below code in head tag of your website html  -->
-
-<style>
-  @font-face {
-    font-display: block;
-    font-family: Roboto;
-    src: url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/7529907e9eaf8ebb5220c5f9850e3811.woff2) format("woff2"), url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/25c678feafdc175a70922a116c9be3e7.woff) format("woff")
-  }
-
-  @font-face {
-    font-display: fallback;
-    font-family: Roboto;
-    font-weight: 600;
-    src: url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/6e9caeeafb1f3491be3e32744bc30440.woff2) format("woff2"), url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/71501f0d8d5aa95960f6475d5487d4c2.woff) format("woff")
-  }
-
-  @font-face {
-    font-display: fallback;
-    font-family: Roboto;
-    font-weight: 700;
-    src: url(https://assets.brevo.com/font/Roboto/Latin/bold/normal/3ef7cf158f310cf752d5ad08cd0e7e60.woff2) format("woff2"), url(https://assets.brevo.com/font/Roboto/Latin/bold/normal/ece3a1d82f18b60bcce0211725c476aa.woff) format("woff")
-  }
-
-  :where(.sib-form-message-panel) {
-    display: none;
-  }
-
-  :where(.sib-form-message-panel .sib-notification__icon) {
-    width: 20px;
-    height: 20px;
-  }
-
-
-  #sib-container input:-ms-input-placeholder {
-    font-family: Helvetica, sans-serif;
-    text-align: left;
-    color: #c0ccda;
-  }
-
-  #sib-container input::placeholder {
-    font-family: Helvetica, sans-serif;
-    text-align: left;
-    color: #c0ccda;
-  }
-
-  #sib-container textarea::placeholder {
-    font-family: Helvetica, sans-serif;
-    text-align: left;
-    color: #c0ccda;
-  }
-
-
-  #sib-container a {
-    text-decoration: underline;
-    color: #2BB2FC;
-  }
-</style>
-<link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
-
-
-<!--  END - We recommend to place the above code in head tag of your website html -->
-
-
-
-
-
-
-<!-- START - We recommend to place the below code where you want the form in your website html  -->
-<div class="sib-form" style="text-align: center;
-         background-color: #EFF2F7; 
-        
-        
-        
-        ">
-  <div id="sib-form-container" class="sib-form-container">
-    <div id="error-message" class="sib-form-message-panel" style="font-family:Helvetica, sans-serif; font-size:16px; text-align:left; color:#661d1d; background-color:#ffeded; border-color:#ff4949; border-radius:3px;
-        max-width:540px;">
-      <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
-        <svg viewBox="0 0 512 512" class="sib-icon sib-notification__icon">
-          <path d="M256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm-11.49 120h22.979c6.823 0 12.274 5.682 11.99 12.5l-7 168c-.268 6.428-5.556 11.5-11.99 11.5h-8.979c-6.433 0-11.722-5.073-11.99-11.5l-7-168c-.283-6.818 5.167-12.5 11.99-12.5zM256 340c-15.464 0-28 12.536-28 28s12.536 28 28 28 28-12.536 28-28-12.536-28-28-28z" />
-        </svg>
-        <span class="sib-form-message-panel__inner-text">
-
-
-                Your subscription could not be saved. Please try again.
-              
-            
-          </span>
-      </div>
-    </div>
-    <div></div>
-    <div id="success-message" class="sib-form-message-panel" style="font-family:Helvetica, sans-serif; font-size:16px; text-align:left; color:#085229; background-color:#e7faf0; border-color:#13ce66; border-radius:3px;
-        max-width:540px;">
-      <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
-        <svg viewBox="0 0 512 512" class="sib-icon sib-notification__icon">
-          <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 464c-118.664 0-216-96.055-216-216 0-118.663 96.055-216 216-216 118.664 0 216 96.055 216 216 0 118.663-96.055 216-216 216zm141.63-274.961L217.15 376.071c-4.705 4.667-12.303 4.637-16.97-.068l-85.878-86.572c-4.667-4.705-4.637-12.303.068-16.97l8.52-8.451c4.705-4.667 12.303-4.637 16.97.068l68.976 69.533 163.441-162.13c4.705-4.667 12.303-4.637 16.97.068l8.451 8.52c4.668 4.705 4.637 12.303-.068 16.97z" />
-        </svg>
-        <span class="sib-form-message-panel__inner-text">
-
-
-                Your subscription has been successful.
-             
-            
-          </span>
-      </div>
-    </div>
-    <div></div>
-    <div id="sib-container" class="sib-container--large sib-container--vertical" style="max-width:540px; text-align:center; background-color:rgba(255,255,255,1); border-width:1px; border-style:solid; border-color:#C0CCD9; border-radius:3px; direction:ltr">
-      <form id="sib-form" method="POST" action="https://1266b1f6.sibforms.com/serve/MUIFAB8-PLBw085Wyal83nlvhllLOxUTJ6G2rrhquR61GBEAQn7EHCobnkzvRF13l1Mp4UKqxq9TI6gMt0e6FrAaPooYWl23MIBUwdEdpttd7rUzU6u8eDUaJMSNQ0nlCZmiOZtgG4oMiswM_TFhuDyiepr8ke-PW18LvoMy3mxtAWnTl2TZir_eg8y9MGAr64YIvoJZXadizgIDtw==" data-type="subscription">
-
-
-        <div style="padding: 8px 0;">
-
-
-          <div class="sib-form-block" style="font-family:Helvetica, sans-serif; font-size:32px; font-weight:700; text-align:left; color:#3C4858; background-color:transparent; text-align:left">
-            <p>Newsletter</p>
-          </div>
-
-
-
-        </div>
-
-
-
-        <div style="padding: 8px 0;">
-
-
-          <div class="sib-form-block" style="font-family:Helvetica, sans-serif; font-size:16px; text-align:left; color:#3C4858; background-color:transparent; text-align:left">
-            <div class="sib-text-form-block">
-              <p>Subscribe to our newsletter and stay updated.</p>
-            </div>
-          </div>
-
-
-
-        </div>
-
-
-
-        <div style="padding: 8px 0;">
-
-
-
-          <div class="sib-input sib-form-block">
-            <div class="form__entry entry_block">
-              <div class="form__label-row ">
-
-
-                <label class="entry__label" style="font-weight: 700; text-align: left; font-family:Helvetica, sans-serif; font-size:16px; font-weight:700; text-align:left; color:#3c4858;" for="EMAIL" data-required="*">Enter your email address to subscribe</label>
-
-
-
-
-                <div class="entry__field">
-
-                  <input class="input " type="text" id="EMAIL" name="EMAIL" autocomplete="off" value="" placeholder="EMAIL" data-required="true" required />
-
+                <!-- Message de succès -->
+                <div class="form-message success" id="successMessage">
+                    ✅ Votre inscription a bien été enregistrée ! Vérifiez votre boîte mail pour confirmer.
                 </div>
 
-              </div>
-
-              <label class="entry__error entry__error--primary" style="font-family:Helvetica, sans-serif; font-size:16px; text-align:left; color:#661d1d; background-color:#ffeded; border-color:#ff4949; border-radius:3px;">
-              </label>
-
-
-
-              <label class="entry__specification" style="font-family:Helvetica, sans-serif; font-size:12px; text-align:left; color:#8390A4; text-align: left ">
-                Provide your email address to subscribe. For e.g abc@xyz.com
-              </label>
-
-            </div>
-          </div>
-
-
-
-
-        </div>
-
-
-
-        <div style="padding: 8px 0;">
-
-
-
-          <div class="sib-input sib-form-block">
-            <div class="form__entry entry_block">
-              <div class="form__label-row ">
-
-
-                <label class="entry__label" style="font-weight: 700; text-align: left; font-family:Helvetica, sans-serif; font-size:16px; font-weight:700; text-align:left; color:#3c4858;" for="FIRSTNAME" data-required="*">Enter your FIRSTNAME</label>
-
-
-
-
-                <div class="entry__field">
-
-                  <input class="input " maxlength="200" type="text" id="FIRSTNAME" name="FIRSTNAME" autocomplete="off" placeholder="FIRSTNAME" data-required="true" required />
-
+                <!-- Message d'erreur -->
+                <div class="form-message error" id="errorMessage">
+                    ❌ Une erreur est survenue. Veuillez réessayer.
                 </div>
 
-              </div>
+                <form id="sib-form" method="POST" action="https://1266b1f6.sibforms.com/serve/MUIFAB8-PLBw085Wyal83nlvhllLOxUTJ6G2rrhquR61GBEAQn7EHCobnkzvRF13l1Mp4UKqxq9TI6gMt0e6FrAaPooYWl23MIBUwdEdpttd7rUzU6u8eDUaJMSNQ0nlCZmiOZtgG4oMiswM_TFhuDyiepr8ke-PW18LvoMy3mxtAWnTl2TZir_eg8y9MGAr64YIvoJZXadizgIDtw==" data-type="subscription">
+                    
+                    <input type="hidden" name="locale" value="fr">
+                    <input type="text" name="email_address_check" value="" style="display:none !important" tabindex="-1" autocomplete="off">
 
-              <label class="entry__error entry__error--primary" style="font-family:Helvetica, sans-serif; font-size:16px; text-align:left; color:#661d1d; background-color:#ffeded; border-color:#ff4949; border-radius:3px;">
-              </label>
+                    <div class="form-group">
+                        <label for="EMAIL">Email *</label>
+                        <input type="email" id="EMAIL" name="EMAIL" placeholder="votre@email.com" required autocomplete="email">
+                        <div class="hint">Ex: abc@xyz.com</div>
+                        <div class="field-error" id="emailError">Veuillez entrer une adresse email valide.</div>
+                    </div>
 
+                    <div class="form-group">
+                        <label for="FIRSTNAME">Prénom *</label>
+                        <input type="text" id="FIRSTNAME" name="FIRSTNAME" placeholder="Votre prénom" required autocomplete="given-name">
+                        <div class="field-error" id="firstnameError">Ce champ est obligatoire.</div>
+                    </div>
 
+                    <div class="form-group">
+                        <label for="LASTNAME">Nom *</label>
+                        <input type="text" id="LASTNAME" name="LASTNAME" placeholder="Votre nom" required autocomplete="family-name">
+                        <div class="field-error" id="lastnameError">Ce champ est obligatoire.</div>
+                    </div>
 
-              <label class="entry__specification" style="font-family:Helvetica, sans-serif; font-size:12px; text-align:left; color:#8390A4; text-align: left ">
-                Customize this optional help text before publishing your form.
-              </label>
-
+                    <button type="submit" class="btn" id="submitBtn">
+                        <span>S'INSCRIRE</span>
+                    </button>
+                </form>
             </div>
-          </div>
+        </section>
 
-
-
-
-        </div>
-
-
-
-        <div style="padding: 8px 0;">
-
-
-
-          <div class="sib-input sib-form-block">
-            <div class="form__entry entry_block">
-              <div class="form__label-row ">
-
-
-                <label class="entry__label" style="font-weight: 700; text-align: left; font-family:Helvetica, sans-serif; font-size:16px; font-weight:700; text-align:left; color:#3c4858;" for="LASTNAME" data-required="*">Enter your LASTNAME</label>
-
-
-
-
-                <div class="entry__field">
-
-                  <input class="input " maxlength="200" type="text" id="LASTNAME" name="LASTNAME" autocomplete="off" placeholder="LASTNAME" data-required="true" required />
-
+        <!-- SECTION 4 ÉTAPES (MÉTHODOLOGIE) -->
+        <section class="steps-section">
+            <h2 class="section-title">Comment ça fonctionne</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">Étape 1</div>
+                    <h3>Audit de votre présence</h3>
+                    <p>Nous analysons votre empreinte numérique actuelle pour identifier les lacunes et les opportunités de positionnement.</p>
                 </div>
-
-              </div>
-
-              <label class="entry__error entry__error--primary" style="font-family:Helvetica, sans-serif; font-size:16px; text-align:left; color:#661d1d; background-color:#ffeded; border-color:#ff4949; border-radius:3px;">
-              </label>
-
-
-
-              <label class="entry__specification" style="font-family:Helvetica, sans-serif; font-size:12px; text-align:left; color:#8390A4; text-align: left ">
-                Customize this optional help text before publishing your form.
-              </label>
-
+                <div class="step-card">
+                    <div class="step-num">Étape 2</div>
+                    <h3>Stratégie sur-mesure</h3>
+                    <p>Élaboration d'une feuille de route personnalisée alignée sur vos objectifs business et votre marché cible.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">Étape 3</div>
+                    <h3>Déploiement des outils</h3>
+                    <p>Mise en place de l'arsenal TFLOW : automatisations, tunnels de conversion, et systèmes de contenu.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">Étape 4</div>
+                    <h3>Scale & Domination</h3>
+                    <p>Optimisation continue et montée en puissance pour dominer votre scène numérique.</p>
+                </div>
             </div>
-          </div>
+        </section>
 
+        <!-- AVANTAGES -->
+        <section class="benefits">
+            <h2>Ce que vous allez obtenir</h2>
+            <ul class="benefits-list">
+                <li><strong>Visibilité stratégique :</strong> Placez-vous là où vos clients vous cherchent réellement.</li>
+                <li><strong>Autorité de marque :</strong> Construisez une crédibilité inattaquable dans votre secteur.</li>
+                <li><strong>Automatisation intelligente :</strong> Libérez votre temps grâce à des systèmes qui travaillent pour vous 24/7.</li>
+                <li><strong>Croissance exponentielle :</strong> Passez de l'invisibilité à la référence incontournable.</li>
+            </ul>
+        </section>
 
+        <!-- CTA FINAL -->
+        <section class="cta-final">
+            <span class="limited">🎯 PLACES LIMITÉES</span>
+            <h2>Prêt à construire votre empire digital ?</h2>
+            <p>Inscrivez-vous maintenant pour recevoir en exclusivité les stratégies, outils et opportunités TFLOW avant tout le monde.</p>
+            <a href="#" class="btn" onclick="document.querySelector('.optin-form').scrollIntoView({behavior: 'smooth'}); return false;">
+                JE VEUX MA PLACE
+            </a>
+        </section>
 
-
-        </div>
-
-
-
-        <div style="padding: 8px 0;">
-
-
-          <div class="sib-form-block" style="text-align: left">
-            <button class="sib-form-block__button sib-form-block__button-with-loader" style="font-family:Helvetica, sans-serif; font-size:16px; font-weight:700; text-align:left; color:#FFFFFF; background-color:#3E4857; border-width:0px; border-radius:3px;" form="sib-form" type="submit">
-              <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512">
-                <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
-              </svg>
-              SUBSCRIBE
-            </button>
-
-
-          </div>
-
-
-
-        </div>
-
-
-
-        <input type="text" name="email_address_check" value="" class="input--hidden">
-
-
-        <input type="hidden" name="locale" value="en">
-
-
-      </form>
+        <footer>
+            <p>&copy; 2024 TFLOW Ecosystem. Tous droits réservés. <br>Construisons votre avenir numérique, ensemble.</p>
+        </footer>
     </div>
-  </div>
-</div>
-<!-- END - We recommend to place the above code where you want the form in your website html  -->
 
-<!-- START - We recommend to place the below code in footer or bottom of your website html  -->
-<script>
-  window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code';
-  window.LOCALE = 'en';
+    <!-- Script de gestion du formulaire Brevo -->
+    <script>
+        (function() {
+            const form = document.getElementById('sib-form');
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Field error elements
+            const emailError = document.getElementById('emailError');
+            const firstnameError = document.getElementById('firstnameError');
+            const lastnameError = document.getElementById('lastnameError');
+            
+            const emailInput = document.getElementById('EMAIL');
+            const firstnameInput = document.getElementById('FIRSTNAME');
+            const lastnameInput = document.getElementById('LASTNAME');
 
+            // Hide all field errors on input
+            [emailInput, firstnameInput, lastnameInput].forEach(input => {
+                input.addEventListener('input', function() {
+                    const errorEl = document.getElementById(this.id.toLowerCase() + 'Error');
+                    if (errorEl) errorEl.style.display = 'none';
+                });
+            });
 
+            // Email validation helper
+            function isValidEmail(email) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            }
 
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Hide global messages
+                successMessage.style.display = 'none';
+                errorMessage.style.display = 'none';
+                
+                // Reset field errors
+                [emailError, firstnameError, lastnameError].forEach(el => {
+                    if (el) el.style.display = 'none';
+                });
 
-  window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "The information provided is invalid. Please review the field format and try again.";
+                // Validate fields
+                let hasError = false;
 
+                if (!emailInput.value.trim()) {
+                    emailError.style.display = 'block';
+                    emailError.textContent = 'Ce champ est obligatoire.';
+                    hasError = true;
+                } else if (!isValidEmail(emailInput.value.trim())) {
+                    emailError.style.display = 'block';
+                    emailError.textContent = 'Veuillez entrer une adresse email valide.';
+                    hasError = true;
+                }
 
+                if (!firstnameInput.value.trim()) {
+                    firstnameError.style.display = 'block';
+                    hasError = true;
+                }
 
+                if (!lastnameInput.value.trim()) {
+                    lastnameError.style.display = 'block';
+                    hasError = true;
+                }
 
+                if (hasError) {
+                    // Scroll to first error
+                    const firstError = form.querySelector('.field-error[style*="block"]');
+                    if (firstError) {
+                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                    return;
+                }
 
-  window.REQUIRED_ERROR_MESSAGE = "This field cannot be left blank. ";
+                // Show loading state
+                submitBtn.classList.add('btn-loading');
+                submitBtn.disabled = true;
 
-  window.GENERIC_INVALID_MESSAGE = "The information provided is invalid. Please review the field format and try again.";
+                // Submit to Brevo via fetch (AJAX)
+                const formData = new FormData(form);
+                
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors' // Brevo handles CORS this way
+                })
+                .then(() => {
+                    // Since no-cors doesn't give us response details, 
+                    // we assume success for the UX flow
+                    successMessage.style.display = 'block';
+                    form.reset();
+                    
+                    // Scroll to success message
+                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // Also submit the form traditionally to ensure Brevo receives it
+                    // (as a fallback, hidden iframe technique)
+                    const iframe = document.createElement('iframe');
+                    iframe.name = 'brevo_hidden_frame';
+                    iframe.style.display = 'none';
+                    document.body.appendChild(iframe);
+                    
+                    const fallbackForm = form.cloneNode(true);
+                    fallbackForm.target = 'brevo_hidden_frame';
+                    fallbackForm.style.display = 'none';
+                    document.body.appendChild(fallbackForm);
+                    fallbackForm.submit();
+                    
+                    // Clean up
+                    setTimeout(() => {
+                        document.body.removeChild(fallbackForm);
+                        setTimeout(() => {
+                            document.body.removeChild(iframe);
+                        }, 5000);
+                    }, 1000);
+                })
+                .catch((error) => {
+                    console.error('Form submission error:', error);
+                    errorMessage.style.display = 'block';
+                    errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                })
+                .finally(() => {
+                    // Remove loading state
+                    submitBtn.classList.remove('btn-loading');
+                    submitBtn.disabled = false;
+                });
+            });
+        })();
+    </script>
 
-
-  window.INVALID_NUMBER = "The information provided is invalid. Please review the field format and try again.";
-
-
-
-
-  window.INVALID_DATE = "Please enter a valid date";
-
-
-
-  window.REQUIRED_MULTISELECT_MESSAGE = 'Please select at least 1 option';
-
-
-  window.translation = {
-    common: {
-      selectedList: '{quantity} list selected',
-      selectedLists: '{quantity} lists selected',
-      selectedOption: '{quantity} selected',
-      selectedOptions: '{quantity} selected',
-    }
-  };
-
-  var AUTOHIDE = Boolean(0);
-</script>
-
-
-
-<script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
-
-
-
-
-<!-- END - We recommend to place the above code in footer or bottom of your website html  -->
-
-<!-- End Brevo Form -->
 </body>
 </html>
